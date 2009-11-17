@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+<ApplicationClass xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="application.*" layout="absolute">
+	<mx:VBox x="0" y="0" width="100%" height="100%" horizontalAlign="center">
+		<mx:Button label="Get Blogs" id="btnRequest"/>
+		<mx:List width="95%" height="100%" id="lstBlogs"></mx:List>
+	</mx:VBox>
 	
-</mx:Application>
+</ApplicationClass>
