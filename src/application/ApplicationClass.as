@@ -11,6 +11,7 @@ package application
 	import mx.controls.List;
 	import mx.core.Application;
 	import mx.events.FlexEvent;
+	import mx.events.ListEvent;
 
 
 	public class ApplicationClass extends Application
@@ -41,9 +42,9 @@ package application
 		public function creationCompleteHandler(value:Event):void
 		{	
 			//Add Event Listeners
-			lstBlogs.addEventListener(MouseEvent.CLICK, lstBlogsClickHandler);
-			this.addEventListener(MouseEvent.MOUSE_WHEEL, lstBlogsWheelHandler);
-					
+			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
+			systemManager.addEventListener(MouseEvent.MOUSE_WHEEL, lstBlogsWheelHandler, true);
+								
 			var amfAgent:AMFAgent = new AMFAgent("views", null);
 			amfAgent.addChannel("http://services6.collectivecolors.com/services/amfphp");
 			
@@ -57,15 +58,24 @@ package application
 		/**
 		 * Event Handlers
 		 **/
-		 public function lstBlogsClickHandler( event:MouseEvent ):void{
+		 public function lstBlogsClickHandler( event:ListEvent ):void{
 		 	var url:String = "http://services6.collectivecolors.com/" + lstBlogs.selectedItem.path;
 		 	navigateToURL(new URLRequest(url));
 		 }
 		 
 		 public function lstBlogsWheelHandler( event:MouseEvent ):void{
-		 	//NOT YET COMPLETE!!!
-		 	event.delta;
+		 	if(event.delta > 0){
+		 		lstBlogs.validateNow();
+		 		if(lstBlogs.verticalScrollPosition == 0){return;}
+		 		lstBlogs.verticalScrollPosition = lstBlogs.verticalScrollPosition - 1;
+		 	}
+		 	else if(event.delta < 0){
+		 		lstBlogs.validateNow();
+		 		if(lstBlogs.verticalScrollPosition == lstBlogs.maxVerticalScrollPosition){return;}
+		 		lstBlogs.verticalScrollPosition = lstBlogs.verticalScrollPosition + 1;
+		 	}
 		 }
+		 
 		public function connectHandler( result:Array ):void{
 			lstBlogs.dataProvider = result;
 		 }

@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ApplicationClass xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="application.*" layout="absolute">
+<ApplicationClass xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="application.*" layout="absolute" focusEnabled="true">
 
 <!-- Reusable inline Item Renderer -->
 <mx:Component id="MessageRenderer">
   <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" borderStyle="none">
   <mx:HRule x="0" y="0" width="100%"/>
 	<mx:HBox x="0" y="0" width="100%" horizontalGap="0">
-		<mx:Label id="user" text="{data.title}" width="55%" textAlign="center" height="15" paddingTop="0" paddingBottom="0"/>
-		<mx:Label text="-" width="5%" textAlign="center" height="15" paddingBottom="0" paddingTop="0"/>
-		<mx:Label id="time" text="{data.dateCreated}" width="40%" textAlign="center" height="15"  paddingBottom="0" paddingTop="0"/>
+		<mx:Label id="user" text="{data.title}" width="55%" textAlign="center" height="15" paddingTop="0" paddingBottom="0" />
+		<mx:Label text="-" width="5%" textAlign="center" height="15" paddingBottom="0" paddingTop="0" />
+		<mx:Label id="time" text="{data.dateCreated}" width="40%" textAlign="center" height="15"  paddingBottom="0" paddingTop="0" />
 	</mx:HBox>
 	<mx:HRule x="0" y="15" width="100%"/>
-	<mx:TextArea id="message" x="0" y="16" width="100%" height="75" htmlText="{data.teaser}" editable="false" borderStyle="none" wordWrap="true" verticalScrollPolicy="off" selectable="false" enabled="false" backgroundAlpha="0"/>				
+	<mx:TextArea id="message" x="0" y="16" width="100%" height="75" htmlText="{data.teaser}" editable="false" borderStyle="none" wordWrap="true" verticalScrollPolicy="off" selectable="false" backgroundAlpha="0"/>				
 </mx:Canvas>
 </mx:Component>
 
-	<mx:VBox x="0" y="0" width="100%" height="100%" horizontalAlign="center">
-		<mx:List width="95%" height="100%" id="lstBlogs" itemRenderer="{MessageRenderer}" useRollOver="false"></mx:List>
+	<mx:VBox x="0" y="0" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" focusEnabled="false" backgroundColor="#6F6E9D">
+		<mx:List width="97%" height="97%" id="lstBlogs" verticalScrollBarStyleName="listStyle" itemRenderer="{MessageRenderer}" useRollOver="false" cornerRadius="5" focusEnabled="false" verticalScrollPolicy="off" backgroundColor="#E2E0FF" borderThickness="2" borderStyle="solid" borderColor="#FFFFFF" themeColor="#FFFFFF"></mx:List>
 	</mx:VBox>
 	
 </ApplicationClass>
