@@ -13,7 +13,6 @@ package application
 		}
 		
 		public function set dateCreated(time:String):void{
-			
 			created = new Date(parseInt(time)*1000);
 		}
 		
