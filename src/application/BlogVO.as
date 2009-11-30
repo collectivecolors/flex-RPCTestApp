@@ -1,5 +1,7 @@
 package application
 {
+	import mx.formatters.DateFormatter;
+	
 	public class BlogVO
 	{
 		//Variables
@@ -7,9 +9,11 @@ package application
 		public var title:String;
 		public var teaser:String;
 		public var path:String;
+		private var formatter:DateFormatter = new DateFormatter();
 		
 		public function BlogVO()
 		{
+			formatter.formatString = "MMMM D | L:NN";
 		}
 		
 		public function set dateCreated(time:String):void{
@@ -20,7 +24,7 @@ package application
 			if(created==null){
 				return null;
 			}
-			return created.toString();
+			return formatter.format(created);
 		}
 	}
 }

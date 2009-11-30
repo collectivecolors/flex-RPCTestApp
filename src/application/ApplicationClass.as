@@ -38,16 +38,27 @@ package application
 			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
 			systemManager.addEventListener(MouseEvent.MOUSE_WHEEL, lstBlogsWheelHandler, true);
 							
-			//Create instance of AMFAgent	
-			var amfAgent:AMFAgent = new AMFAgent("views", null);
+			//Create instance of AMFAgent with the "views" source
+			var viewsAmfAgent:AMFAgent = new AMFAgent("views", null);
 			//Set the URL to the Drupal Services Module we mean to connect with
-			amfAgent.addChannel("http://services6.collectivecolors.com/services/amfphp");
+			viewsAmfAgent.addChannel("http://services6.collectivecolors.com/services/amfphp");
 			//Create instance of ViewsServices, and give it a reference to the above AMFAgent
-			var system:ViewsServices = new ViewsServices(amfAgent, null);
+			var views:ViewsServices = new ViewsServices(viewsAmfAgent, null);
 			//Set the event handlers for the ViewsServices class
-			system.viewGetHandlers(connectHandler, faultHandler);
+			views.viewGetHandlers(viewsConnectHandler, faultHandler);
 			//Retrieve blog entries
-			system.viewGet("recent_blog_entries");
+			views.viewGet("recent_blog_entries");
+			
+			//Create instance of AMFAgent with the "user" source
+			var userAmfAgent:AMFAgent = new AMFAgent("user", null);
+			//Set the URL to the Drupal Services Module we mean to connect with
+			userAmfAgent.addChannel("http://services6.collectivecolors.com/services/amfphp");
+			//Create instance of UserServices, and give it a reference to the above AMFAgent
+			var user:UserServices = new UserServices(userAmfAgent, null);
+			//Set the event handlers for the ViewsServices class
+			user.userGetHandlers(userConnectHandler, faultHandler);
+			
+			//user.userGet("0");
 		}
 
 
@@ -79,9 +90,13 @@ package application
 		 	}
 		 }
 		
-		public function connectHandler( result:Array ):void{
+		public function viewsConnectHandler( result:Array ):void{
 			//Set the list's data provider to the latest results
 			lstBlogs.dataProvider = result;
+		 }
+		 
+		 public function userConnectHandler( result:String ):void{
+		 	Alert.show(result);
 		 }
 		 
 		 public function faultHandler( fault:Object ):void{
