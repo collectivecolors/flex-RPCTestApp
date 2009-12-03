@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ApplicationClass xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="application.*" layout="absolute" focusEnabled="true" width="788" height="315">
+<ApplicationClass xmlns:mx="http://www.adobe.com/2006/mxml" xmlns="application.*" layout="absolute" focusEnabled="true" width="788" height="315" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#6F6E9D, #6F6E9D]">
 
 <!-- Reusable inline Item Renderer -->
 <mx:Component id="MessageRenderer">
@@ -15,7 +15,7 @@
 </mx:Canvas>
 </mx:Component>
 <mx:HBox width="97%" horizontalAlign="center" verticalAlign="middle" height="97%" horizontalCenter="0" verticalCenter="0">
-	<mx:List x="0" y="149" height="100%" backgroundColor="#E2E0FF" borderThickness="2" borderColor="#FFFFFF" themeColor="#FFFFFF" borderStyle="solid" cornerRadius="5"></mx:List>
+	<mx:List x="0" y="149" height="100%" backgroundColor="#E2E0FF" borderThickness="2" borderColor="#FFFFFF" themeColor="#FFFFFF" borderStyle="solid" cornerRadius="5" id="lstTerms"></mx:List>
 	<mx:List width="100%" height="100%" id="lstBlogs" verticalScrollBarStyleName="listStyle" itemRenderer="{MessageRenderer}" useRollOver="false" cornerRadius="5" focusEnabled="false" verticalScrollPolicy="off" backgroundColor="#E2E0FF" borderThickness="2" borderStyle="solid" borderColor="#FFFFFF" themeColor="#FFFFFF"></mx:List>
 	</mx:HBox>
 </ApplicationClass>

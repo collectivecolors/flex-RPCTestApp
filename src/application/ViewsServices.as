@@ -3,6 +3,7 @@ package application
 	import com.collectivecolors.rpc.IServiceAgent;
 	import com.collectivecolors.rpc.RemoteService;
 	
+	import mx.controls.Alert;
 	import mx.rpc.events.ResultEvent;
  
  
@@ -52,7 +53,7 @@ package application
 		
 		// Convert the returned blog entry objects into easier to display BlogVO's
 		protected function parseViewGetResult( result:Object ) : Array
-		{
+		{	
 			var fullBlogs:Array = result as Array;
 			//Sort the blogs based on their date of creation
 			fullBlogs.sortOn("created");
