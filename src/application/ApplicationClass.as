@@ -44,6 +44,7 @@ package application
 			//Add Event Listeners
 			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
 			lstTerms.addEventListener(ListEvent.ITEM_CLICK, lstTermsClickHandler);
+				//Intercept all mouse scroll wheel events
 			systemManager.addEventListener(MouseEvent.MOUSE_WHEEL, lstBlogsWheelHandler, true);
 			
 			//Create instance of AMFAgent with the "views" source
@@ -59,23 +60,6 @@ package application
 			retrieveBlogTerms();
 			//Retrieve all blogs
 			retrieveBlogs();
-			
-			/**
-			 * INERT CODE
-			 * 
-			 * One day, this code may do something. Quite possibly something of vital importance. 
-			 * But that day is not today, and until that day, when this code is finally allowed 
-			 * to fulfill its purpose it will remain unused and unnoticed, but never forgotten.
-			
-			//Create instance of AMFAgent with the "user" source
-			var userAmfAgent:AMFAgent = new AMFAgent("user", null);
-			//Set the URL to the Drupal Services Module we mean to connect with
-			userAmfAgent.addChannel("http://services6.collectivecolors.com/services/amfphp");
-			//Create instance of UserServices, and give it a reference to the above AMFAgent
-			var user:UserServices = new UserServices(userAmfAgent, null);
-			//Set the event handlers for the ViewsServices class
-			user.userGetHandlers(userConnectHandler, faultHandler);			
-			*/
 		}
 
 
@@ -120,6 +104,7 @@ package application
 		 	}
 		 }
 		
+		//Retrieves the results from the ViewsServices class and determines what type of information it contains
 		public function viewsConnectHandler( result:Array ):void{
 			//Check to see if the returned results are BlogVOs
 			if(result[0] is BlogVO){
@@ -130,7 +115,7 @@ package application
 				lstTerms.dataProvider = result;
 			}
 		 }
-		 
+
 		 public function faultHandler( fault:Object ):void{
 		 	Alert.show(String(fault));
 		 }
@@ -139,10 +124,12 @@ package application
 		 * Methods
 		 **/
 		 
+		 //Retrieves the current popular blog terms
 		 public function retrieveBlogTerms():void{			
 			views.viewGet("popular_blog_terms", "terms");
 		 }
 		 
+		 //Retrieves either all blogs or blogs that contain a specific keyword depending on input
 		 public function retrieveBlogs(term:String = null):void{
 			//The user wants to search for all blog entries
 			if(term == null){
