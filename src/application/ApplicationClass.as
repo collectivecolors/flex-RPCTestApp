@@ -7,13 +7,15 @@ package application
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
+	import mx.containers.Panel;
 	import mx.controls.Alert;
 	import mx.controls.List;
 	import mx.core.Application;
 	import mx.events.FlexEvent;
 	import mx.events.ListEvent;
-
-
+	import mx.core.mx_internal;
+	use namespace mx_internal;
+	
 	public class ApplicationClass extends Application
 	{
 		/**
@@ -22,6 +24,8 @@ package application
 		 
 		 public var lstBlogs:List;
 		 public var lstTerms:List;
+		 
+		 
 		 
 		 /**
 		 * RPC Services
@@ -40,7 +44,7 @@ package application
 
 
 		public function creationCompleteHandler(value:Event):void
-		{	
+		{				
 			//Add Event Listeners
 			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
 			lstTerms.addEventListener(ListEvent.ITEM_CLICK, lstTermsClickHandler);
