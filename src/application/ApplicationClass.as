@@ -48,7 +48,7 @@ package application
 			//Add Event Listeners
 			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
 			lstTerms.addEventListener(ListEvent.ITEM_CLICK, lstTermsClickHandler);
-				//Intercept all mouse scroll wheel events
+			//Intercept all mouse scroll wheel events
 			systemManager.addEventListener(MouseEvent.MOUSE_WHEEL, lstBlogsWheelHandler, true);
 			
 			//Create instance of AMFAgent with the "views" source
