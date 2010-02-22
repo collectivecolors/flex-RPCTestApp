@@ -7,13 +7,13 @@ package application
 	import flash.net.URLRequest;
 	import flash.net.navigateToURL;
 	
-	import mx.containers.Panel;
+	import mx.containers.Canvas;
 	import mx.controls.Alert;
-	import mx.controls.List;
 	import mx.core.Application;
+	import mx.core.mx_internal;
+	import mx.effects.Pause;
 	import mx.events.FlexEvent;
 	import mx.events.ListEvent;
-	import mx.core.mx_internal;
 	use namespace mx_internal;
 	
 	public class ApplicationClass extends Application
@@ -22,9 +22,9 @@ package application
 		 * MXML Components
 		 **/
 		 
-		 public var lstBlogs:List;
-		 public var lstTerms:List;
-		 
+		 public var lstBlogs:CustomList;
+		 public var lstTerms:CustomList;
+		 public var cnvsLeftShadow:Canvas;
 		 
 		 
 		 /**
@@ -44,7 +44,7 @@ package application
 
 
 		public function creationCompleteHandler(value:Event):void
-		{				
+		{	
 			//Add Event Listeners
 			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
 			lstTerms.addEventListener(ListEvent.ITEM_CLICK, lstTermsClickHandler);
@@ -116,7 +116,7 @@ package application
 			}
 			//Check to see if the returned results are strings
 			else if(result[0] is String){
-				lstTerms.dataProvider = result;
+				lstTerms.dataProvider = result; 
 			}
 		 }
 

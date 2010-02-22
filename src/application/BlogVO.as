@@ -13,7 +13,7 @@ package application
 		
 		public function BlogVO()
 		{
-			formatter.formatString = "MMMM D | L:NN";
+			formatter.formatString = "MM.DD.YY";
 		}
 		
 		public function set dateCreated(time:String):void{

@@ -4,69 +4,102 @@
 				  layout="absolute"
 				  focusEnabled="true"
 				  width="785"
-				  height="320"
+				  height="340"
 				  backgroundGradientAlphas="[1.0, 1.0]"
-				  backgroundGradientColors="[#6F6E9D, #6F6E9D]" 
-				  verticalScrollPolicy="off" 
+				  backgroundGradientColors="[#424242, #000000]"
+				  verticalScrollPolicy="off"
 				  cornerRadius="0">
 
-<mx:Style>
-	ScrollBar
+	<mx:Style>
+	.companyLogo
+	{
+		background-image: Embed(source="skins/Logo.png");
+	}
+	.blogScroll
 	{
        	trackSkin: Embed(source="skins/ScrollTrack.png",
-       		scaleGridLeft="2", scaleGridTop="2", 
-   			scaleGridRight="5", scaleGridBottom="8");
-       	thumb-up-skin: Embed(source="skins/ScrollThumbUp.png",
+       		scaleGridLeft="2", scaleGridTop="3", 
+   			scaleGridRight="4", scaleGridBottom="5");
+       	thumb-up-skin: Embed(source="skins/BlogScrollThumb.png",
    			scaleGridLeft="2", scaleGridTop="2", 
-   			scaleGridRight="7", scaleGridBottom="6");
-		thumb-over-skin: Embed(source="skins/ScrollThumbOver.png",
+   			scaleGridRight="8", scaleGridBottom="22");
+		thumb-over-skin: Embed(source="skins/BlogScrollThumbDown.png",
    			scaleGridLeft="2", scaleGridTop="2", 
-   			scaleGridRight="7", scaleGridBottom="6");
-		thumb-down-skin: Embed(source="skins/ScrollThumbDown.png",
+   			scaleGridRight="8", scaleGridBottom="22");
+		thumb-down-skin: Embed(source="skins/BlogScrollThumbDown.png",
    			scaleGridLeft="2", scaleGridTop="2", 
-   			scaleGridRight="7", scaleGridBottom="6");
+   			scaleGridRight="8", scaleGridBottom="22");
    		up-arrow-skin: ClassReference("undefined");
        	down-arrow-skin: ClassReference("undefined");
      }
-     .topCorners
+     .termScroll
      {
-     	background-image: Embed(source="skins/RoundedCornersTop.png",
-     		scaleGridLeft="16", scaleGridTop="1", 
-   			scaleGridRight="18", scaleGridBottom="16");
-   		background-size: "100%";
-     }
-     .bottomCorners
-     {
-     	background-image: Embed(source="skins/RoundedCornersBottom.png",
-     		scaleGridLeft="16", scaleGridTop="1", 
-   			scaleGridRight="18", scaleGridBottom="16");
-   		background-size: "100%";
+     	trackSkin: Embed(source="skins/ScrollTrack.png",
+       		scaleGridLeft="2", scaleGridTop="3", 
+   			scaleGridRight="4", scaleGridBottom="5");
+       	thumb-up-skin: Embed(source="skins/TermScrollThumb.png",
+   			scaleGridLeft="2", scaleGridTop="2", 
+   			scaleGridRight="8", scaleGridBottom="22");
+		thumb-over-skin: Embed(source="skins/TermScrollThumbDown.png",
+   			scaleGridLeft="2", scaleGridTop="2", 
+   			scaleGridRight="8", scaleGridBottom="22");
+		thumb-down-skin: Embed(source="skins/TermScrollThumbDown.png",
+   			scaleGridLeft="2", scaleGridTop="2", 
+   			scaleGridRight="8", scaleGridBottom="22");
+   		up-arrow-skin: ClassReference("undefined");
+       	down-arrow-skin: ClassReference("undefined");
      }
      .titleBar
      {
      	background-image: Embed(source="skins/BlogTitle.png",
-     		scaleGridLeft="39", scaleGridTop="1", 
-   			scaleGridRight="41", scaleGridBottom="29");
+     		scaleGridLeft="1", scaleGridTop="1", 
+   			scaleGridRight="580", scaleGridBottom="39");
    		background-size: "100%";
      }
-     .titleBarRollover
+     .leftShadow
      {
-     	background-image: Embed(source="skins/BlogTitleRollover.png",
-     		scaleGridLeft="39", scaleGridTop="1", 
-   			scaleGridRight="41", scaleGridBottom="29");
+     	background-image: Embed(source="skins/LeftShadow.png",
+     		scaleGridLeft="1", scaleGridTop="4", 
+   			scaleGridRight="9", scaleGridBottom="45");
+   		background-size: "100%";
+     }
+     .rightShadow
+     {
+     	background-image: Embed(source="skins/RightShadow.png",
+     		scaleGridLeft="1", scaleGridTop="4", 
+   			scaleGridRight="9", scaleGridBottom="45");
+   		background-size: "100%";
+     }
+     .termSeparator
+     {
+     	background-image: Embed(source="skins/TermSeparator.png");
+   		background-size: "100%";
+     }
+     .termUnselected
+     {
+     	background-image: ClassReference("undefined");
+     }
+     .termRollover
+     {
+     	background-image: Embed(source="skins/TermRollover.png");
+   		background-size: "100%";
+     }
+     .termSelected
+     {	
+     	background-image: Embed(source="skins/TermSelected.png");
    		background-size: "100%";
      }
      .termList
      {
-     	background-image: Embed(source="skins/TermListIndicator.png");
+     	background-image: Embed(source="skins/BlogTitle.png");
      }
      .termListRollover
      {
-     	background-image: Embed(source="skins/TermListIndicatorRollover.png");
+     	background-image: Embed(source="skins/BlogTitle.png");
      }
      .termListSelect
      {
-     	background-image: Embed(source="skins/TermListIndicatorSelected.png");
+     	background-image: Embed(source="skins/BlogTitle.png");
      }
   </mx:Style>
 
@@ -74,175 +107,261 @@
 	<!-- Reusable inline Item Renderer -->
 	<mx:Component id="BlogRenderer">
 		<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
-				   width="100%"
-				   height="100%"
-				   horizontalScrollPolicy="off"
-				   verticalScrollPolicy="off"
-				   rollOver="{titleBar.styleName='titleBarRollover'}"
-				   rollOut="{titleBar.styleName='titleBar'}">
-			<mx:HBox id="titleBar"
-					 x="0"
-					 y="0"
-					 width="100%"
-					 height="30"
-					 horizontalGap="0"
-					 styleName="titleBar"
-					 >
-				<mx:Label width="45"
-						  height="21"/>
-				<mx:Label id="user"
-						  text="{data.title}"
-						  width="70%"
-						  textAlign="left"
-						  height="21"
-						  fontFamily="Calibri"
-						  paddingTop="1"
-						  paddingBottom="0"
-						  fontSize="14"/>
-				<mx:Label id="time"
-						  text="{data.dateCreated}"
-						  width="30%"
-						  textAlign="left"
-						  height="21"
-						  fontFamily="Calibri"
-						  paddingBottom="0"
-						  paddingTop="1"
-						  fontSize="14"/>
-			</mx:HBox>
-			<mx:TextArea id="message"
-						 x="0"
-						 y="30"
-						 width="100%"
-						 height="105"
-						 htmlText="{data.teaser}"
-						 editable="false"
-						 borderStyle="none"
-						 wordWrap="true"
-						 verticalScrollPolicy="off"
-						 selectable="false"
-						 backgroundAlpha="0"
-						 horizontalScrollPolicy="off"/>
-		</mx:Canvas>
+		   width="100%"
+		   height="100%"
+		   horizontalScrollPolicy="off"
+		   verticalScrollPolicy="off">
+	<mx:HBox id="titleBar"
+			 x="0"
+			 y="0"
+			 width="100%"
+			 height="40"
+			 horizontalGap="0"
+			 styleName="titleBar">
+		<mx:Label width="15"
+				  height="100%"/>
+		<mx:Label id="title"
+				  text="{data.title}"
+				  width="80%"
+				  textAlign="left"
+				  height="100%"
+				  fontFamily="Verdana"
+				  paddingTop="5"
+				  paddingBottom="0"
+				  fontSize="16"
+				  fontWeight="bold"
+				  color="#FFFFFF"
+				  useHandCursor="true"
+				  buttonMode="true"
+				  mouseChildren="false"/>
+		<mx:Label id="time"
+				  text="{data.dateCreated}"
+				  width="20%"
+				  textAlign="left"
+				  height="100%"
+				  fontFamily="Verdana"
+				  paddingBottom="0"
+				  paddingTop="6"
+				  fontSize="14"
+				  color="#FFFFFF"
+				  fontWeight="bold"
+				  useHandCursor="true"
+				  buttonMode="true"
+				  mouseChildren="false"/>
+	</mx:HBox>
+	<mx:VBox x="0" y="38" width="100%" height="100%" verticalGap="0" horizontalAlign="right">
+		<mx:TextArea id="message"
+					 width="98%"
+					 height="88"
+					 htmlText="{data.teaser}"
+					 editable="false"
+					 borderStyle="none"
+					 wordWrap="true"
+					 verticalScrollPolicy="off"
+					 selectable="false"
+					 backgroundAlpha="0"
+					 horizontalScrollPolicy="off"
+		/>
+		<mx:Label
+				  text="Read More..."
+				  width="98%"
+				  height="12"
+				  paddingTop="-3"
+				  textAlign="right"
+				  fontWeight="bold"
+				  color="#468E95"
+				  useHandCursor="true"
+				  buttonMode="true"
+				  mouseChildren="false"/>
+	</mx:VBox>
+</mx:Canvas>
 	</mx:Component>
-	
+
 	<!-- Reusable inline Item Renderer -->
 	<mx:Component id="TermRenderer">
 		<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
 				   implements="mx.controls.listClasses.IDropInListItemRenderer"
 				   width="100%"
-				   height="100%"
-				   rollOver="{changeStyle('RollOver')}"
-				   rollOut="{changeStyle('RollOut')}"
+				   height="24"
 				   horizontalScrollPolicy="off"
 				   creationComplete="init()"
-				   >
-		<mx:HBox width="100%"
-				 height="20"
-				 horizontalGap="2">
-			<mx:Canvas 	width="1"
-					height="100%"/>
-			<mx:Canvas id="termIndicator"
-					width="15"
-					height="100%"
-					styleName="termList"/>
-			<mx:Label width="100%"
-					height="100%"
-					fontFamily="Calibri"
-					fontSize="12"
-					text="{data}"/>
-		</mx:HBox>
-		<mx:Script>
-			<![CDATA[
-				import mx.controls.Alert;
-				import mx.events.FlexEvent;
-				import mx.events.ListEvent;
-				import mx.controls.List;
-				import mx.controls.listClasses.BaseListData;
-			
- 
-			private var _listData:BaseListData;
-			
-    		public function get listData() : BaseListData
-    		{
-    		return _listData;
-    		}
-    		
-    		public function set listData( value:BaseListData ) : void
-    		{
-    		_listData = value;
-    		}
-    		
-    		private function init():void{
-    			listData.owner.addEventListener(ListEvent.ITEM_CLICK, listClickListener);
-    		}
-    		
-    		private function listClickListener(event:ListEvent):void{
-    			//If the data in this item renderer is the selected item, change the style to the selected style
-    			if(event.rowIndex == listData.rowIndex){
-    				termIndicator.styleName='termListSelect';
-    			}
-    			//Else change it to the default style
-    			else{
-    				termIndicator.styleName='termList';
-    			}
-    		}
-    		
-    		private function changeStyle(mouseStatus:String):void{
-    			//If the current item is selected, do nothing
-    			if(termIndicator.styleName == "termListSelect"){
-    				return;
-    			}
-    			//Change style of term indicator to the rollover style
-    			if(mouseStatus == "RollOver"){
-    				termIndicator.styleName="termListRollover"
-    			}
-    			//Change style of term indicator to the normal style
-    			else if(mouseStatus == "RollOut"){
-    				termIndicator.styleName="termList"}	
-    			}
-    		
-			]]>
-		</mx:Script>
+				   dataChange="dataChangeHandler()"
+				   rollOver="{rolloverHandler('RollOver')}"
+				   rollOut="{rolloverHandler('RollOut')}">
+			<mx:VBox x="0"
+					 y="0"
+					 width="100%"
+					 height="100%"
+					 verticalGap="0">
+				<mx:Label width="100%"
+						  height="22"
+						  fontFamily="Verdana"
+						  fontSize="10"
+						  text="{data}"
+						  textAlign="center"
+						  fontWeight="bold"/>
+				<mx:Canvas width="100%"
+						   height="2"
+						   styleName="termSeparator"/>
+			</mx:VBox>
+			<mx:Canvas x="0"
+					   y="8"
+					   width="100%"
+					   height="14"
+					   id="termIndicator"
+					   styleName="termUnselected"/>
+			<mx:Script>
+				<![CDATA[
+					import mx.core.Application;
+					import mx.states.SetStyle;
+					import mx.controls.Alert;
+					import mx.events.FlexEvent;
+					import mx.events.ListEvent;
+					import mx.controls.List;
+					import mx.controls.listClasses.BaseListData;
+
+
+					private var _listData:BaseListData;
+
+					public function get listData():BaseListData
+					{
+						return _listData;
+					}
+
+					public function set listData(value:BaseListData):void
+					{
+						_listData=value;
+					}
+
+					private function init():void
+					{
+						//Add an event listener to the renderer's parent so it will know when a list object is clicked
+						listData.owner.addEventListener(ListEvent.ITEM_CLICK, listClickHandler);
+					}
+					
+					private function dataChangeHandler():void
+					{
+						var currentSelection:String = Application.application.lstTerms.selectedItem;
+						if(currentSelection == null && data == "ALL" || data == currentSelection){
+							termIndicator.styleName="termSelected";
+						}
+						else if(currentSelection == null || data != currentSelection){
+							termIndicator.styleName="termUnselected";
+						}
+					}
+
+					private function listClickHandler(event:ListEvent):void
+					{
+						var currentSelection:String = Application.application.lstTerms.selectedItem;
+						if (data == currentSelection)
+						{
+							termIndicator.styleName='termSelected';
+						}
+						//Else change it to the default style
+						else if (data != currentSelection)
+						{
+							termIndicator.styleName='termUnselected';
+						}
+					}
+
+					private function rolloverHandler(mouseStatus:String):void
+					{
+						//If the current item is selected, do nothing
+						if (termIndicator.styleName == "termSelected")
+						{
+							return;
+						}
+						//Change style of term indicator to the rollover style
+						if (mouseStatus == "RollOver")
+						{
+							termIndicator.styleName="termRollover"
+						}
+						//Change style of term indicator to the normal style
+						else if (mouseStatus == "RollOut")
+						{
+							termIndicator.styleName="termUnselected"
+						}
+					}
+				]]>
+			</mx:Script>
 		</mx:Canvas>
 	</mx:Component>
-
-	<mx:HBox width="97%"
-			 horizontalAlign="center"
-			 verticalAlign="middle"
-			 height="97%"
-			 horizontalCenter="0"
-			 verticalCenter="0">
-		<mx:VBox width="100" height="100%" verticalGap="0">
-			<mx:Canvas height="17" width="100%" styleName="topCorners"/>
-			<CustomList
-					 height="100%"
-					 backgroundColor="#FFFFFF"
-					 borderThickness="2"
-					 itemRenderer="{TermRenderer}"
-					 borderColor="#FFFFFF"
-					 themeColor="#8A8A8A"
-					 borderStyle="none"
-					 cornerRadius="0"
-					 id="lstTerms"
-					 width="100%">
-			</CustomList>
-			<mx:Canvas width="100%" height="17"  styleName="bottomCorners"/>
-		</mx:VBox>
-			<mx:VBox x="-16" y="239" width="100%" height="100%" verticalAlign="middle" horizontalAlign="center" verticalGap="0" borderStyle="none" cornerRadius="0" backgroundColor="#6F6E9D">
-		<mx:Canvas height="17" width="100%" styleName="topCorners"/>
-		<CustomList width="100%"
+	<mx:Image x="0" y="0" source="skins/Logo.png" id="imgLogo" autoLoad="true"/>
+	<mx:Label text="Collective Colors Blog"
+			  height="40"
+			  width="100%"
+			  color="#FFFFFF"
+			  left="20"
+			  top="0"
+			  fontSize="20"
+			  fontWeight="bold"
+			  paddingTop="1"/>
+	<mx:VBox x="0"
+			 y="0"
+			 width="100%"
+			 height="100%"
+			 verticalGap="0">
+		<mx:Canvas width="100%"
+				   height="40">
+			
+		</mx:Canvas>
+		<mx:HBox width="100%"
+				 horizontalAlign="center"
+				 verticalAlign="top"
 				 height="100%"
-				 id="lstBlogs"
-				 itemRenderer="{BlogRenderer}"
-				 cornerRadius="0"
-				 focusEnabled="true"
-				 backgroundColor="#FFFFFF"
-				 borderThickness="2"
-				 borderStyle="none"
-				 borderColor="#FFFFFF"
-				 selectionDuration="5">
-		</CustomList>
-		<mx:Canvas width="100%" height="17"  styleName="bottomCorners"/>
+				 horizontalGap="0">
+			<mx:Canvas width="10"
+					   height="100%"/>
+			<mx:Canvas width="100"
+					 height="100%">
+				<CustomList height="100%"
+							backgroundAlpha="0"
+							itemRenderer="{TermRenderer}"
+							themeColor="#8A8A8A"
+							borderStyle="none"
+							id="lstTerms"
+							width="100%"
+							color="#FFFFFF"
+							verticalScrollBarStyleName="termScroll" top="20"/>
+			</mx:Canvas>
+			<mx:Canvas width="12"
+					   height="100%"/>
+			<mx:Canvas width="100%"
+					   height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">		
+				<mx:VBox width="100%"
+						 height="98%"
+						 verticalAlign="top"
+						 horizontalAlign="center"
+						 verticalGap="0"
+						 borderStyle="none"
+						 cornerRadius="0"
+						 left="0"
+						 top="0"
+						 backgroundColor="#FFFFFF">
+					<mx:Canvas width="100%"
+							   height="5"/>
+					<CustomList width="100%"
+								height="100%"
+								id="lstBlogs"
+								itemRenderer="{BlogRenderer}"
+								focusEnabled="true"
+								backgroundColor="#FFFFFF"
+								borderStyle="none"
+								verticalScrollBarStyleName="blogScroll"
+								verticalScrollPolicy="on" variableRowHeight="false"/>
+					<mx:Canvas width="100%"
+							   height="5"/>
+				</mx:VBox>
+				<mx:Canvas width="10"
+						   height="98%"
+						   styleName="leftShadow"
+						   left="0"
+						   top="0"/>
+			</mx:Canvas>
+			<mx:Canvas width="10"
+					   height="98%"
+					   styleName="rightShadow"
+					   backgroundColor="#FFFFFF"/>
+		</mx:HBox>
 	</mx:VBox>
-	</mx:HBox>
 </ApplicationClass>

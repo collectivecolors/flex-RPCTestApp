@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   width="100%"
+		   height="100%"
+		   horizontalScrollPolicy="off"
+		   verticalScrollPolicy="off">
+	<mx:HBox id="titleBar"
+			 x="0"
+			 y="0"
+			 width="100%"
+			 height="40"
+			 horizontalGap="0"
+			 styleName="titleBar">
+		<mx:Label width="15"
+				  height="100%"/>
+		<mx:Label id="title"
+				  text="{data.title}"
+				  width="80%"
+				  textAlign="left"
+				  height="100%"
+				  fontFamily="Verdana"
+				  paddingTop="5"
+				  paddingBottom="0"
+				  fontSize="16"
+				  fontWeight="bold"
+				  color="#FFFFFF"
+				  useHandCursor="true"
+				  buttonMode="true"
+				  mouseChildren="false"/>
+		<mx:Label id="time"
+				  text="{data.dateCreated}"
+				  width="20%"
+				  textAlign="left"
+				  height="100%"
+				  fontFamily="Verdana"
+				  paddingBottom="0"
+				  paddingTop="6"
+				  fontSize="14"
+				  color="#FFFFFF"
+				  fontWeight="bold"
+				  useHandCursor="true"
+				  buttonMode="true"
+				  mouseChildren="false"/>
+	</mx:HBox>
+	<mx:VBox x="0" y="38" width="100%" height="100%" verticalGap="0">
+		<mx:TextArea id="message"
+					 width="98%"
+					 height="88"
+					 text="{data.teaser}"
+					 editable="false"
+					 borderStyle="none"
+					 wordWrap="true"
+					 verticalScrollPolicy="off"
+					 selectable="false"
+					 backgroundAlpha="0"
+					 horizontalScrollPolicy="off"
+		/>
+		<mx:Label
+				  text="Read More..."
+				  width="98%"
+				  height="12"
+				  paddingTop="-3"
+				  textAlign="right"
+				  fontWeight="bold"
+				  color="#468E95"/>
+	</mx:VBox>
+</mx:Canvas>
