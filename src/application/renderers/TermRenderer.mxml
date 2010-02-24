@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   implements="mx.controls.listClasses.IDropInListItemRenderer"
+		   width="100%"
+		   height="24"
+		   horizontalScrollPolicy="off"
+		   creationComplete="creationCompleteHandler()"
+		   dataChange="dataChangeHandler()"
+		   rollOver="rolloverHandler('RollOver')"
+		   rollOut="rolloverHandler('RollOut')">
+	<mx:Label width="100%"
+			  fontFamily="Verdana"
+			  fontSize="10"
+			  text="{data}"
+			  textAlign="center"
+			  fontWeight="bold"
+			  top="0"
+			  bottom="2"/>
+	<mx:Image width="100%"
+			  height="2"
+			  includeInLayout="true"
+			  scaleContent="true"
+			  maintainAspectRatio="false"
+			  source="@Embed(source='skins/TermSeparator.png')"
+			  bottom="0"/>
+	<mx:Image x="0"
+			  width="100%"
+			  height="14"
+			  id="termIndicator"
+			  bottom="2"
+			  scaleContent="true"
+			  source="{null}"/>
+
+	<mx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			import mx.states.SetStyle;
+			import mx.controls.Alert;
+			import mx.events.FlexEvent;
+			import mx.events.ListEvent;
+			import mx.controls.List;
+			import mx.controls.listClasses.BaseListData;
+
+			private var _listData:BaseListData;
+
+			/**
+			 * Art Assets
+			 **/
+
+			/*Term Indicator Images*/
+			
+			//Rollover Image
+			[Embed(source="skins/TermRollover.png")]
+			[Bindable]
+			public var termRollover:Class;
+
+			//Selected Image
+			[Embed(source="skins/TermSelected.png")]
+			[Bindable]
+			public var termSelected:Class;
+			
+			
+			/**
+			 * Methods
+			 **/
+			
+			//Required by IDropInListItemRenderer
+			public function get listData():BaseListData
+			{
+				return _listData;
+			}
+
+			//Required by IDropInListItemRenderer
+			public function set listData(value:BaseListData):void
+			{
+				_listData=value;
+			}
+			
+			
+			/**
+			 * Event Handlers
+			 **/
+			
+			//On Initialization
+			private function creationCompleteHandler():void
+			{
+				//Add an event listener to the renderer's parent so it will know when a list object is clicked
+				listData.owner.addEventListener(ListEvent.ITEM_CLICK, listClickHandler);
+			}
+
+			//On item renderer data change
+			private function dataChangeHandler():void
+			{
+				//Currently selected term
+				var currentSelection:String=Application.application.lstTerms.selectedItem;
+				
+				//If the application is just starting highlight the "ALL" term
+				//If an item is selected and this term matches the selection, highlight the term
+				if (currentSelection == null && data == "ALL" || data == currentSelection)
+				{
+					termIndicator.source=termSelected;
+				}
+				
+				//If the application is just starting, and this is not the "ALL" term don't highlight
+				//If an item is selected and this term does not match the selection, don't highlight the term
+				else if (currentSelection == null && data != "ALL" || data != currentSelection)
+				{
+					termIndicator.source=null;
+				}
+			}
+
+			//On parent list click
+			private function listClickHandler(event:ListEvent):void
+			{
+				//Currently selected term
+				var currentSelection:String=Application.application.lstTerms.selectedItem;
+				
+				//If the selected item is the term currently in this item renderer, change the selection indicator image to the selected image
+				if (data == currentSelection)
+				{
+					termIndicator.source=termSelected;
+				}
+				
+				//Else change it to the default style
+				else if (data != currentSelection)
+				{
+					termIndicator.source=null;
+				}
+			}
+			
+			//On item renderer mouse rollover/rollout
+			private function rolloverHandler(mouseStatus:String):void
+			{
+				//If the current item is selected, do nothing
+				if (termIndicator.source == termSelected)
+				{
+					return;
+				}
+				//If the mouse is rolling over the item renderer, change style of term indicator to the rollover style
+				else if (mouseStatus == "RollOver")
+				{
+					termIndicator.source=termRollover
+				}
+				//If the mouse is rolling out of the item renderer, change style of term indicator to the normal style
+				else if (mouseStatus == "RollOut")
+				{
+					termIndicator.source=null
+				}
+			}
+		]]>
+	</mx:Script>
+</mx:Canvas>

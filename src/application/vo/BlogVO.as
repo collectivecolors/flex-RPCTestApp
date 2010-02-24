@@ -1,4 +1,4 @@
-package application
+package application.vo
 {
 	import mx.formatters.DateFormatter;
 	

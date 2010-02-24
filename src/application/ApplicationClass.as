@@ -10,11 +10,13 @@ package application
 	import mx.containers.Canvas;
 	import mx.controls.Alert;
 	import mx.core.Application;
-	import mx.core.mx_internal;
 	import mx.effects.Pause;
 	import mx.events.FlexEvent;
 	import mx.events.ListEvent;
-	use namespace mx_internal;
+	
+	import application.vo.*;
+	import application.components.*;
+	import application.services.*;
 	
 	public class ApplicationClass extends Application
 	{
@@ -24,7 +26,6 @@ package application
 		 
 		 public var lstBlogs:CustomList;
 		 public var lstTerms:CustomList;
-		 public var cnvsLeftShadow:Canvas;
 		 
 		 
 		 /**
@@ -48,8 +49,6 @@ package application
 			//Add Event Listeners
 			lstBlogs.addEventListener(ListEvent.ITEM_CLICK, lstBlogsClickHandler);
 			lstTerms.addEventListener(ListEvent.ITEM_CLICK, lstTermsClickHandler);
-			//Intercept all mouse scroll wheel events
-			systemManager.addEventListener(MouseEvent.MOUSE_WHEEL, lstBlogsWheelHandler, true);
 			
 			//Create instance of AMFAgent with the "views" source
 			var viewsAmfAgent:AMFAgent = new AMFAgent("views", null);
@@ -71,16 +70,17 @@ package application
 		 * Event Handlers
 		 **/
 		 
-		 //If the user clicks on a blog take them to that blog in a new browser window/tab
+		 //On a click to the blog list, open that blog's page in a new tab
 		 public function lstBlogsClickHandler( event:ListEvent ):void{
+		 	//Take them to that blog in a new browser window/tab
 		 	var url:String = "http://services6.collectivecolors.com/" + lstBlogs.selectedItem.path;
 		 	navigateToURL(new URLRequest(url));
 		 }
 		 
-		 //When the user clicks on a search term, pull up all blogs that have that term
+		 //On a click to the term list, filter for blogs that involve that term
 		 public function lstTermsClickHandler( event:ListEvent ):void{
-		 	//The "All" term is special as its not truly a term supported by the site, so we handle it locally
-		 	//The "All" term is added by the parser in the ViewsServices class
+		 	//The "ALL" term is special as its not truly a term supported by the site, so we handle it locally
+		 	//The "ALL" term is added by the parser in the ViewsServices class
 		 	if(lstTerms.selectedItem == "ALL"){
 		 		retrieveBlogs();
 		 	}
@@ -89,38 +89,22 @@ package application
 		 		retrieveBlogs(lstTerms.selectedItem as String);
 		 	}
 		 }
-		 
-		 //Allows mouse wheel scrolling as long as the user is focused anywhere in the application
-		 public function lstBlogsWheelHandler( event:MouseEvent ):void{
-		 	if(event.delta > 0){
-		 		lstBlogs.validateNow();
-		 		//If the scroll position is already at the minimum, do nothing
-		 		if(lstBlogs.verticalScrollPosition == 0){return;}
-		 		//Move the scroll position down
-		 		lstBlogs.verticalScrollPosition = lstBlogs.verticalScrollPosition - 1;
-		 	}
-		 	else if(event.delta < 0){
-		 		lstBlogs.validateNow();
-		 		//If the scroll position is already at the maximum, do nothing
-		 		if(lstBlogs.verticalScrollPosition == lstBlogs.maxVerticalScrollPosition){return;}
-		 		//Move the scroll position up
-		 		lstBlogs.verticalScrollPosition = lstBlogs.verticalScrollPosition + 1;
-		 	}
-		 }
 		
-		//Retrieves the results from the ViewsServices class and determines what type of information it contains
+		//On return of the results from the ViewsServices class, determine what type of information it contains
 		public function viewsConnectHandler( result:Array ):void{
 			//Check to see if the returned results are BlogVOs
 			if(result[0] is BlogVO){
 				lstBlogs.dataProvider = result;
 			}
-			//Check to see if the returned results are strings
+			//Check to see if the returned results are Strings
 			else if(result[0] is String){
 				lstTerms.dataProvider = result; 
 			}
 		 }
-
+		
+		//On a fault from the ViewsService class
 		 public function faultHandler( fault:Object ):void{
+		 	//Display the fault
 		 	Alert.show(String(fault));
 		 }
 		 

@@ -1,4 +1,4 @@
-package application
+package application.components
 {
 	import flash.display.DisplayObject;
 	import flash.display.Sprite;
@@ -22,7 +22,7 @@ package application
 		 */
 		override protected function drawHighlightIndicator(indicator:Sprite, x:Number, y:Number, width:Number, height:Number, color:uint, itemRenderer:IListItemRenderer):void
 		{
-			
+			//Do nothing
 		}
 
 		/**
@@ -30,7 +30,7 @@ package application
 		 */
 		override protected function drawCaretIndicator(indicator:Sprite, x:Number, y:Number, width:Number, height:Number, color:uint, itemRenderer:IListItemRenderer):void
 		{
-			
+			//Do nothing
 		}
 
 		/**
@@ -38,7 +38,7 @@ package application
 		 */
 		override protected function drawSelectionIndicator(indicator:Sprite, x:Number, y:Number, width:Number, height:Number, color:uint, itemRenderer:IListItemRenderer):void
 		{
-			
+			//Do nothing
 		}
 
 	}

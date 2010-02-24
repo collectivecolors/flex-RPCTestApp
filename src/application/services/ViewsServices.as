@@ -1,10 +1,11 @@
-package application
+package application.services
 { 
 	import com.collectivecolors.rpc.IServiceAgent;
 	import com.collectivecolors.rpc.RemoteService;
-
+	
 	import mx.rpc.events.ResultEvent;
 
+	import application.vo.*;
 
 	public class ViewsServices extends RemoteService
 	{
@@ -85,13 +86,13 @@ package application
 				//Create an array to hold the newly created BlogVO's
 				var displayBlogs:Array=new Array;
 				//Iterate through all of the returned blog objects and create BlogVO's out of them
-				for (var i:int=0; i < fullBlogs.length; i++)
+				for (var j:int = 0; j < fullBlogs.length; j++)
 				{
 					var blog:BlogVO=new BlogVO();
-					blog.title=fullBlogs[i].title;
-					blog.dateCreated=fullBlogs[i].created;
-					blog.teaser=fullBlogs[i].teaser;
-					blog.path=fullBlogs[i].path;
+					blog.title=fullBlogs[j].title;
+					blog.dateCreated=fullBlogs[j].created;
+					blog.teaser=fullBlogs[j].teaser;
+					blog.path=fullBlogs[j].path;
 					//Add the newly created BlogVO to the displayBlogs array
 					displayBlogs.push(blog);
 				}
